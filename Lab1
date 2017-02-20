@@ -1,0 +1,37 @@
+#include <iostream>  
+using namespace std;
+
+int main()
+{
+	cout << " bool size "
+		<< sizeof(bool)
+		<< "\n char size "
+		<< sizeof(char)
+		<< "\n char16_t size "
+		<< sizeof(char16_t)
+		<< "\n char32_t size "
+		<< sizeof(char32_t)
+		<< "\n wchar_t size "
+		<< sizeof(wchar_t)
+		<< "\n short size "
+		<< sizeof(short)
+		<< "\n int size "
+		<< sizeof(int)
+		<< "\n long size "
+		<< sizeof(long)
+		<< "\n long long size "
+		<< sizeof(long long)
+		<< "\n float size "
+		<< sizeof(float)
+		<< "\n double size "
+		<< sizeof(double)
+		<< "\n long double size "
+		<< sizeof(long double)
+		<< "\n nullptr_t size "
+		<< sizeof(nullptr_t)
+		<< "\n void size "
+		<< sizeof(void*)
+		<< endl;
+	system("pause");
+	return 0;
+}
