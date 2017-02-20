@@ -1,0 +1,91 @@
+#include <iostream>
+#include <conio.h>
+#include <locale>
+using namespace std;
+
+class Complex
+{
+	double rel, img; 
+	public:
+	Complex();
+	Complex(double real, double imag); 
+	Complex add(Complex, Complex);
+	Complex sub(Complex, Complex);
+	Complex mult(Complex, int);
+	Complex divd(Complex, int);
+
+	double getRel(){ return rel; };
+	double getImg(){ return img; };
+	void getC();
+	void printC();
+	
+
+};
+Complex Complex::add(Complex a, Complex b)
+{
+	return Complex(a.rel + b.rel, a.img + b.img);
+}
+Complex Complex::sub(Complex a, Complex b)
+{
+	return Complex(a.rel - b.rel, a.img - b.img);
+}
+Complex Complex::mult(Complex a, int i)
+{
+	return Complex(a.rel * i , a.img * i);
+}
+Complex Complex::divd(Complex a, int j)
+{
+	return Complex(a.rel / j, a.img / j);
+}
+
+Complex::Complex() 
+{
+	rel = 0;
+	img = 0;
+}
+
+Complex::Complex(double real, double imag) 
+{
+	rel = real;
+	img = imag;
+}
+
+void Complex::getC() 
+{
+	cout << "Enter real part\n";
+	cin >> rel;
+	cout << "Enter imaginary part\n";
+	cin >> img;
+}
+
+void Complex::printC()
+{
+	cout << rel
+		 << "+"
+		 << img
+		 << "i\n"
+		 << endl;
+}
+int main()
+{
+	int i, j;
+	Complex a, b, c;
+	a.getC();
+	a.printC();
+	b.getC();
+	b.printC();
+	c = a.add(a,b);
+	c.printC();
+	c = a.sub(a,b);
+	c.printC();
+	cout << "Enter number to multiply on\n";
+	cin >> i;
+	c = a.mult(a, i);
+	c.printC();
+	cout << "Enter number to divide by\n";
+	cin >> j;
+	c = a.divd(a, j);
+	c.printC();
+	system("pause");
+	return 0;
+}
