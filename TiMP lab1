@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+	int a = 0;
+	char ch_1[256], ch_2[256];
+	FILE *file_1;
+	FILE *file_2;
+	if ((file_1 = fopen("f1.txt", "r")) == NULL)
+	{
+		cout << "Error!";
+		system("pause");
+		return 1;
+	}
+	if ((file_2 = fopen("f2.txt", "r")) == NULL)
+	{
+		cout <<"Error!";
+		system("pause");
+		return 1;
+	}
+	while (!feof(file_1) && !feof(file_2))
+	{
+		fgets(ch_1, 256, file_1);
+		fgets(ch_2, 256, file_2);
+		a++;
+		if (strcmp(ch_1, ch_2) != 0)
+		{
+			cout << "\nString ";
+			cout << a;
+			cout << " differ";
+			cout << "\nString f1: ";
+			cout << ch_1;
+			cout << "\nString f2: ";
+			cout << ch_2;
+		}
+	}
+	fclose(file_1);
+	fclose(file_2);
+	system("pause");
+	return 0;
+}
