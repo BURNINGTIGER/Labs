@@ -1,0 +1,129 @@
+#include <iostream>
+#include <iomanip>
+#include <fstream>
+using namespace std;
+class Matrix
+{
+	int **matr;
+	int st, cl;
+public:
+	Matrix();
+	Matrix(int st, int cl);
+	Matrix(const Matrix &copy_matr);
+	~Matrix();
+
+	void get(const char*);
+	void print() const;
+	Matrix operator+ (const Matrix &mat_2) const;
+	Matrix operator* (const Matrix &mat_2) const;
+};
+Matrix::Matrix()
+{
+	st = cl = 2;
+	matr = new int*[st];
+	for (int i = 0; i < st; i++)
+		matr[i] = new int[cl];
+	for (int i = 0; i < st; i++)
+	for (int j = 0; j < cl; j++)
+		matr[i][j] = 0;
+}
+Matrix::Matrix(int m, int n) 
+{
+	matr = new int *[m];
+	for (int i = 0; i < m; i++)
+		matr[i] = new int[n];
+	for (int i = 0; i < st; i++)
+	for (int j = 0; j < cl; j++)
+		matr[i][j] = 0;
+}
+Matrix::Matrix(const Matrix &copy_matr) 
+{
+	st = copy_matr.st;
+	cl = copy_matr.cl;
+	matr = new int*[st];
+	for (int i = 0; i < st; i++)
+	{
+		matr[i] = new int[cl];
+		for (int j = 0; j < cl; j++)
+			matr[i][j] = copy_matr.matr[i][j];
+	}
+}
+Matrix::~Matrix()
+{
+	for (int i = 0; i < st; i++)
+		delete[] matr[i];
+	delete [] matr;
+}
+void Matrix::get(const char* f1)
+{
+	ifstream in;
+	in.open(f1);
+	for (int i = 0; i < st; i++)
+	{
+		for (int j = 0; j < cl; j++)
+			in >> matr[i][j];
+	}
+	in.close();
+}
+void Matrix::print() const
+{
+	for (int i = 0; i<st; i++)
+	{
+		for (int j = 0; j<cl; j++)
+		{
+			cout << matr[i][j] << " ";
+		}
+		cout << "\n";
+	}
+	cout << "\n";
+	cout << flush;
+}
+Matrix Matrix::operator+ (const Matrix &mat_2) const
+{
+	if (st != mat_2.st || cl != mat_2.cl)
+	{
+		cout << "Add error\n";
+		system("pause");
+		exit(1);
+	}
+	Matrix result(st, cl);
+	for (int i = 0; i < st; i++)
+	{
+		for (int j = 0; j < cl; j++)
+			result.matr[i][j] = matr[i][j] + mat_2.matr[i][j];
+	}
+	return result;
+}
+Matrix Matrix::operator*(const Matrix &mat_2) const
+{
+	if (st != mat_2.cl)
+	{
+		cout << "Mult error\n";
+		system("pause");
+		exit(1);
+	}
+	Matrix result(st, mat_2.cl);
+	for (int i = 0; i < st; i++)
+	for (int j = 0; j < mat_2.cl; j++)
+	{
+		result.matr[i][j] = 0;
+		for (int k = 0; k < cl; k++)
+			result.matr[i][j] += matr[i][k] * mat_2.matr[k][j];
+	}
+	return result;
+}
+
+int main()
+{
+	Matrix m1, m2;
+	m1.get("f1.txt");
+	m1.print();
+	m2.get("f2.txt");
+	m2.print();
+	Matrix r = m1 + m2;
+	r.print();
+	Matrix re = (m1 * m2);
+	re.print();
+	system("pause");
+	return 0;
+}
