@@ -1,0 +1,60 @@
+#include<iostream>;
+using namespace std;
+
+class A
+{
+public:
+	void publmet();
+protected:
+	void protmet();
+private:
+	void privmet();
+};
+void A::publmet()
+{
+	cout << " pub ";
+}
+void A::protmet()
+{
+	cout << " prot ";
+}
+void A::privmet()
+{
+	cout << " priv ";
+}
+
+class B : public A
+{};
+
+class C : protected A
+{};
+
+class D : private A
+{};
+
+int main()
+{
+	A a;
+	B b;
+	C c;
+	D d;
+
+	a.publmet();
+	//a.protmet();
+	//a.privmet();
+
+	b.publmet();
+	//b.protmet();
+	//b.privmet();
+
+	//c.publmet();
+	//c.protmet();
+	//c.privmet();
+
+	//d.publmet();
+	//d.protmet();
+	//d.privmet();
+
+	system("pause");
+	return(0);
+}
